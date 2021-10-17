@@ -2,7 +2,7 @@
 #include <Wire.h>
 #include <AFMotor.h>
 
-//ultrasonic
+                                            //ultrasonic
 AF_DCMotor rightBack(1);                          
 AF_DCMotor rightFront(2);
 AF_DCMotor leftFront(3);
@@ -17,7 +17,10 @@ float timeOut = 2*(maxDist+10)/100/340*1000000;
 
 byte motorSpeed = 55;
 int motorOffset = 10;                          
-int turnSpeed = 50;      
+int turnSpeed = 50;  
+                                              //mopping
+int motor=5;
+int pwm = 2 ;
 
 
 void setup()
@@ -48,6 +51,9 @@ void setup()
   //disinfectant spraying
   
   //mopping 
+  pinMode(motor, OUTPUT);
+  pinMode(pwm,OUTPUT) ;  
+  Serial.begin(9600);
   
   
   //sealing the bag
@@ -180,6 +186,11 @@ int checkDirection()
     turnDir = 2;
   return turnDir;
 }
+
+void mopping()                                         //mopping
+{
+ digitalWrite(motor, HIGH);
+ analogWrite(pwm,255) ;       // speed of rotaion by chaning pwm input
  }
  
  
